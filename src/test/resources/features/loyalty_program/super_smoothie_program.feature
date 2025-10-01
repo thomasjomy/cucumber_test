@@ -33,3 +33,26 @@ Feature: Super Smoothie Loyalty Card Program
       | Basic Banana Smoothie         | 180 |
       | Deluxe Banana Smoothie        | 240 |
       | Banana and Ice Cream Smoothie | 350 |
+      | Apple and Kale                | 160 |
+      | Orange and Yogurt             | 240 |
+      | Triple Berry Blend            | 380 |
+
+  Scenario Outline: Smoothies are organized into categories based on their calorie count
+
+  Each category is represented by a number of "flames" - the more "flames" the smoothie has,
+  the more calories it contains.
+
+    When a <Smoothie> contains <Calories> calories
+    Then it should be classed as as <Flame Count> flame smoothie in the <Range> range
+    Examples: Healthy Smoothies
+    Smoothies under 300 calories are classified as 'Healthy'
+      | Category  | Smoothie               | Calories | Flame Count | Range   |
+      | Under 200 | Basic Banana Smoothie  | 180      | 1           | Healthy |
+      | Under 200 | Apple and Kale         | 160      | 1           | Healthy |
+      | Under 300 | Deluxe Banana Smoothie | 240      | 2           | Healthy |
+      | Under 300 | Orange and Yogurt      | 240      | 2           | Healthy |
+    Examples: Indulgent Smoothies
+    Smoothies with 300 or more calories are considered 'Indulgent'
+      | Under 400   | Banana and Ice Cream Smoothie | 350 | 3 | Indulgent |
+      | Under 400   | Triple Berry Blend            | 380 | 3 | Indulgent |
+      | 400 or more | Strawberry special            | 490 | 4 | Indulgent |
